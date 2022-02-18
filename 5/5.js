@@ -29,14 +29,6 @@ const getWeather = async (location) => {
     const user = await getUser(userName);
     console.log(`Name of github account owner:  ${user.name}`);
     console.log(`Public repositories:  ${user.public_repos}`);
-  } catch (error) {
-    console.log("User not found");
-  }
-})();
-
-(async () => {
-  try {
-    const user = await getUser(userName);
     if (process.argv[3] === "followers") {
       console.log(`Followers: ${user.followers}`);
     } else {
@@ -49,8 +41,6 @@ const getWeather = async (location) => {
 
 (async () => {
   try {
-    const user = await getUser(userName);
-
     const repos = await getRepositories(userName);
     for (i = 0; i < repos.length; i++) {
       console.log(`Repository's number ${i} name: ${repos[i].name}$`);
@@ -64,7 +54,7 @@ const getWeather = async (location) => {
   try {
     const user = await getUser(userName);
     const { location } = user;
-    const weather = await getWeather(location);
+    const weather = await getWeather(user.location);
 
     console.log(`Weather main: ${weather.weather[0].main}`);
     console.log(`Weather description:${weather.weather[0].description}`);
