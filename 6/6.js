@@ -16,18 +16,37 @@ if (process.argv.length === 2) {
 } else if (process.argv[2] === lista) {
 const readFile = async filePath => {
   try {
-    const data = await fs.promises.readFile(lista.txt, 'utf8')
+    const data = await fs.promises.readFile(tasks, 'utf8')
     console.log(data);
-  }}
-} else if (process.argv[2] === dodaj) {
+  }
+}} else if (process.argv[2] === dodaj) {
   let data = process.argv[3];
-  writeFile("lista.txt", data)
-    .then(() => {
-      console.log("Task added");
+ getTask(process.argv[3])
+    .then(tasks => {
+        console.log("Tasks:");
+        tasks.forEach(task => console.log(tasks.title));
+        return saveFile(`${filename}.json`, tasks);
     })
-    .catch((error) => {
-      console.log("Error saving task", error);
+    .catch(error => {
+        console.log(Error);
     });
 } else {
   console.log("Something went wrong");
 }
+
+const saveFile = (filename, data) => {
+    return writeFile(filename, JSON.stringify(data))
+        .then(() => 'File saved');
+}
+
+let filename;
+
+// getTask(process.argv[3])
+//     .then(tasks => {
+//         console.log("Tasks:");
+//         tasks.forEach(task => console.log(tasks.title));
+//         return saveFile(`${filename}.json`, tasks);
+//     })
+//     .catch(error => {
+//         console.log(Error);
+//     });

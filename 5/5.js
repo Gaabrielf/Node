@@ -54,7 +54,7 @@ const getWeather = async (location) => {
   try {
     const user = await getUser(userName);
     const { location } = user;
-    const weather = await getWeather(user.location);
+    const weather = await getWeather(location);
 
     console.log(`Weather main: ${weather.weather[0].main}`);
     console.log(`Weather description:${weather.weather[0].description}`);
