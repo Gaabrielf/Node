@@ -1,8 +1,7 @@
-// Przykładowe wywołanie z nazwą użytkownika: "node 2.js octocat"
-// Przykładowe wywołanie z nazwą użytkownika, jeśli chcemy znać liczbę followersów: "node 2.js octocat followers"
+// Przykładowe wywołanie z nazwą użytkownika: "node 5.js octocat"
+// Przykładowe wywołanie z nazwą użytkownika, jeśli chcemy znać liczbę followersów: "node 5.js octocat followers"
 
 const axios = require("axios");
-const argv = require("yargs").argv;
 
 const userName = process.argv[2];
 const followers = process.argv[3];

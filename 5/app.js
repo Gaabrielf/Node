@@ -1,10 +1,11 @@
-// Przykładowe wywołanie z nazwą użytkownika: "node 2.js octocat"
-// Przykładowe wywołanie z nazwą użytkownika, jeśli chcemy znać liczbę followersów: "node 2.js octocat followers"
+// Przykładowe wywołanie z nazwą użytkownika: "node app.js octocat"
+// Przykładowe wywołanie z nazwą użytkownika, jeśli chcemy znać liczbę followersów: "node app.js octocat followers"
 
-// const argv = require("yargs").argv;
+const axios = require("axios");
+
 const getUser = require("./user");
 const getWeather = require("./weather");
-const getRepositories = require("./user");
+const getRepositories = require("./repositories");
 
 const userName = process.argv[2];
 const followers = process.argv[3];
@@ -29,6 +30,19 @@ const followers = process.argv[3];
     }
   } catch (error) {
     console.log("User not found");
+  }
+})();
+
+(async () => {
+  try {
+    const user = await getUser(userName);
+
+    const repos = await getRepositories(userName);
+    for (i = 0; i < repos.length; i++) {
+      console.log(`Repository's number ${i} name: ${repos[i].name}$`);
+    }
+  } catch (error) {
+    console.log("Repositories names not found");
   }
 })();
 
